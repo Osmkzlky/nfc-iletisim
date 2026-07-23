@@ -55,7 +55,6 @@
             transition: background-color 0.3s;
         }
         .btn:active { background-color: #005bb5; }
-        .info-text { font-size: 12px; color: #999; margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -65,12 +64,12 @@
         <h2>Software Engineer & Co-Founder</h2>
         <p>Coriolis Core</p>
         
-        <button id="vcardBtn" onclick="downloadVCard()" class="btn">Kişilere Ekle</button>
-        <div class="info-text">Kartvizit otomatik açılmazsa butona tıklayın.</div>
+        <button onclick="downloadVCard()" class="btn">Kişilere Ekle</button>
     </div>
 
     <script>
         function downloadVCard() {
+            // URL'ler item1 ve item2 olarak gruplandı ve X-ABLabel ile özel isimler verildi
             var vcardText = 
                 "BEGIN:VCARD\r\n" +
                 "VERSION:3.0\r\n" +
@@ -100,13 +99,6 @@
             window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
         }
-
-        // Sayfa yüklendiğinde butona otomatik tıklatmayı dener
-        window.onload = function() {
-            setTimeout(function() {
-                downloadVCard();
-            }, 300); // Tarayıcının hazır olması için 300ms gecikme
-        };
     </script>
 </body>
 </html>
