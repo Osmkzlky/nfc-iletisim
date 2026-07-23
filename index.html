@@ -9,18 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#090c11;
-    --surface:#121821;
-    --surface-2:#1a212c;
+    --bg:#030507;
+    --surface:#0c1116;
+    --surface-2:#141b22;
     --border:rgba(255,255,255,0.08);
     --border-strong:rgba(255,255,255,0.14);
-    --text:#eef1f5;
-    --text-dim:#8b95a5;
-    --text-faint:#5b6577;
-    --core:#ff7a45;
-    --core-soft:rgba(255,122,69,0.16);
-    --coriolis:#49c6d6;
-    --coriolis-soft:rgba(73,198,214,0.14);
+    --text:#eef2f6;
+    --text-dim:#8d99a6;
+    --text-faint:#57626d;
+    --core:#57d9f2;
+    --core-soft:rgba(87,217,242,0.18);
+    --coriolis:#b9c3ce;
+    --coriolis-soft:rgba(185,195,206,0.14);
+    --ocean:#1c4c78;
   }
 
   *{ box-sizing:border-box; }
@@ -103,12 +104,25 @@
     width:100%;
     height:100%;
     transform-style:preserve-3d;
-    animation: cardflip 7s cubic-bezier(.65,0,.35,1) infinite;
+    animation:
+      cardflip 7s cubic-bezier(.65,0,.35,1) infinite,
+      glowpulse 3.4s ease-in-out infinite;
     border-radius:11px;
-    box-shadow:
-      0 0 0 1px var(--border-strong),
-      0 14px 30px -12px rgba(0,0,0,0.7),
-      0 0 22px -6px rgba(73,198,214,0.35);
+  }
+
+  @keyframes glowpulse{
+    0%, 100%{
+      box-shadow:
+        0 0 0 1px var(--border-strong),
+        0 14px 30px -12px rgba(0,0,0,0.75),
+        0 0 20px -4px rgba(87,217,242,0.4);
+    }
+    50%{
+      box-shadow:
+        0 0 0 1px rgba(87,217,242,0.4),
+        0 14px 30px -12px rgba(0,0,0,0.75),
+        0 0 34px -2px rgba(87,217,242,0.75);
+    }
   }
 
   .card-flip-scene:hover .card-flip,
@@ -163,7 +177,8 @@
     font-size:11px;
     letter-spacing:0.08em;
     text-transform:uppercase;
-    color:var(--coriolis);
+    color:var(--core);
+    text-shadow:0 0 12px rgba(87,217,242,0.5);
     display:flex;
     align-items:center;
     justify-content:center;
@@ -176,7 +191,7 @@
     height:5px;
     border-radius:50%;
     background:var(--core);
-    box-shadow:0 0 6px rgba(255,122,69,0.8);
+    box-shadow:0 0 8px rgba(87,217,242,0.85);
     flex:none;
   }
 
@@ -187,8 +202,8 @@
     gap:8px;
     width:100%;
     padding:14px 20px;
-    background:linear-gradient(135deg, var(--core), #ff9662);
-    color:#161006;
+    background:linear-gradient(135deg, var(--ocean), var(--core));
+    color:#04141c;
     text-decoration:none;
     border-radius:13px;
     font-weight:600;
@@ -196,10 +211,10 @@
     font-family:'Inter', sans-serif;
     cursor:pointer;
     border:none;
-    box-shadow:0 10px 24px -8px rgba(255,122,69,0.55);
+    box-shadow:0 10px 26px -8px rgba(87,217,242,0.5);
     transition:transform 0.15s ease, box-shadow 0.15s ease;
   }
-  .btn:hover{ box-shadow:0 12px 28px -6px rgba(255,122,69,0.65); }
+  .btn:hover{ box-shadow:0 12px 30px -6px rgba(87,217,242,0.65); }
   .btn:active{ transform:translateY(1px) scale(0.99); }
   .btn:focus-visible{ outline:2px solid var(--coriolis); outline-offset:3px; }
 
@@ -232,9 +247,9 @@
     transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
   }
   .icon-link:hover{
-    border-color:var(--coriolis);
-    color:var(--coriolis);
-    background:rgba(73,198,214,0.08);
+    border-color:var(--core);
+    color:var(--core);
+    background:rgba(87,217,242,0.1);
   }
   .icon-link:focus-visible{ outline:2px solid var(--coriolis); outline-offset:2px; }
   .icon-link svg{ width:19px; height:19px; }
@@ -266,7 +281,7 @@
     <button onclick="downloadVCard()" class="btn">
       Kişilere Ekle
     </button>
-    <p class="caption">iOS &amp; Android ile uyumlu vCard</p>
+    
 
     <div class="links">
       <a class="icon-link" href="https://linkedin.com/in/osmankizilkaya3423" target="_blank" rel="noopener" aria-label="LinkedIn profili">
