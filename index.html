@@ -49,6 +49,9 @@
             border-radius: 12px;
             font-weight: 600;
             font-size: 16px;
+            cursor: pointer;
+            border: none;
+            width: 100%;
             transition: background-color 0.3s;
         }
         .btn:active { background-color: #005bb5; }
@@ -61,8 +64,43 @@
         <h2>Software Engineer & Co-Founder</h2>
         <p>Coriolis Core</p>
         
-        <!-- Tüm vCard verin URL-Encoded formatta doğrudan butonun içine gömüldü -->
-        <a href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0D%0AVERSION%3A3.0%0D%0AN%3AK%C4%B1z%C4%B1lkaya%3BOsman%3B%3B%3B%0D%0AFN%3AOsman%20K%C4%B1z%C4%B1lkaya%0D%0AORG%3ACoriolis%20Core%0D%0ATITLE%3ASoftware%20Engineer%20%26%20Co-Founder%0D%0ATEL%3BTYPE%3DCELL%3A05443554253%0D%0AEMAIL%3Aosdeveloperman%40gmail.com%0D%0AURL%3Ahttps%3A%2F%2Flinkedin.com%2Fin%2Fosmankizilkaya3423%0D%0AURL%3Ahttps%3A%2F%2Fyoutube.com%2F%40osdeveloperman%0D%0AEND%3AVCARD" download="Osman_Kizilkaya.vcf" class="btn">Kişilere Ekle</a>
+        <!-- Buton artık doğrudan bir JavaScript fonksiyonunu tetikliyor -->
+        <button onclick="downloadVCard()" class="btn">Kişilere Ekle</button>
     </div>
+
+    <script>
+        function downloadVCard() {
+            // vCard verisi, satır atlamaları (\r\n) korunarak tam uyumlu hale getirildi
+            var vcardText = 
+                "BEGIN:VCARD\r\n" +
+                "VERSION:3.0\r\n" +
+                "N:Kızılkaya;Osman;;;\r\n" +
+                "FN:Osman Kızılkaya\r\n" +
+                "ORG:Coriolis Core\r\n" +
+                "TITLE:Software Engineer & Co-Founder\r\n" +
+                "TEL;TYPE=CELL:05443554253\r\n" +
+                "EMAIL:osdeveloperman@gmail.com\r\n" +
+                "URL:https://linkedin.com/in/osmankizilkaya3423\r\n" +
+                "URL:https://youtube.com/@osdeveloperman\r\n" +
+                "END:VCARD";
+
+            // Veriyi gerçek bir dosya formatına (Blob) dönüştürüyoruz
+            var blob = new Blob([vcardText], { type: 'text/vcard;charset=utf-8' });
+            var url = window.URL.createObjectURL(blob);
+            
+            // Geçici bir indirme linki oluşturup tetikliyoruz
+            var a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'Osman_Kizilkaya.vcf';
+            
+            document.body.appendChild(a);
+            a.click();
+            
+            // İşlem bittikten sonra temizlik yapıyoruz
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+    </script>
 </body>
 </html>
